@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-
 group :test, :development do
-  gem 'rails', '~> 3.2'
+  gem 'rails', if RUBY_VERSION >= '2.4.0' then '~> 4.2' else '~> 3.2' end
+  gem 'nokogiri', if RUBY_VERSION >= '2.4.0' then '~> 1.7.0' else '~> 1.6.0' end
   gem 'sqlite3'
   gem 'pothoven-attachment_fu', :path => '.'
   gem 'rmagick'

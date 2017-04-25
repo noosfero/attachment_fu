@@ -39,7 +39,7 @@ class FileSystemTest < Test::Unit::TestCase
     assert_created do
       attachment = upload_file :filename => '/files/rails.png'
       assert_valid attachment
-      assert File.exists?(attachment.full_filename), "#{attachment.full_filename} does not exist"
+      assert File.exist?(attachment.full_filename), "#{attachment.full_filename} does not exist"
     end
     attachment
   end
@@ -55,8 +55,8 @@ class FileSystemTest < Test::Unit::TestCase
         attachment.filename        = 'rails2.png'
         attachment.temp_paths.unshift File.join(FIXTURE_PATH, file)
         attachment.save!
-        assert  File.exists?(attachment.full_filename), "#{attachment.full_filename} does not exist"
-        assert !File.exists?(old_filename),             "#{old_filename} still exists"
+        assert  File.exist?(attachment.full_filename), "#{attachment.full_filename} does not exist"
+        assert !File.exist?(old_filename),             "#{old_filename} still exists"
       end
     end
   end
@@ -70,8 +70,8 @@ class FileSystemTest < Test::Unit::TestCase
     assert_not_created do
       attachment.filename        = 'rails2.png'
       attachment.save
-      assert  File.exists?(attachment.full_filename), "#{attachment.full_filename} does not exist"
-      assert !File.exists?(old_filename),             "#{old_filename} still exists"
+      assert  File.exist?(attachment.full_filename), "#{attachment.full_filename} does not exist"
+      assert !File.exist?(old_filename),             "#{old_filename} still exists"
       assert !attachment.reload.size.zero?
       assert_equal 'rails2.png', attachment.filename
     end

@@ -117,7 +117,7 @@ class Test::Unit::TestCase #:nodoc:
       filename = if model.respond_to?(:full_filename)
         model.full_filename(thumbnail)
       else
-        thumb = thumbnail ? model.thumbnails.find(:first, :conditions => { :thumbnail => thumbnail.to_s }, :include => :db_file) : model
+        thumb = thumbnail ? model.thumbnails.includes(:db_file).where(thumbnail: thumbnail.to_s).first : model
         unless thumb && thumb.db_file && thumb.db_file.data && thumb.db_file.data.size > 0
           STDERR.puts "Cannot find DB file data for thumbnail #{thumbnail.inspect} -> Aborting JPEG quality check."
           return

@@ -96,9 +96,9 @@ module Technoweenie # :nodoc:
           # Renames the given file before saving
           def rename_file
             return unless @old_filename && @old_filename != full_filename
-            if save_attachment? && File.exists?(@old_filename)
+            if save_attachment? && File.exist?(@old_filename)
               FileUtils.rm @old_filename
-            elsif File.exists?(@old_filename)
+            elsif File.exist?(@old_filename)
               FileUtils.mv @old_filename, full_filename
             end
             @old_filename =  nil
